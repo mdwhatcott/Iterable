@@ -1,0 +1,25 @@
+fluent
+
+This repository aims to provide convenience functions for common tasks that are often verbose and
+inconvenient.  The aim is to be consice yet very readable.  
+
+The task of mutating collections is just such a task in python.  C# offers Linq to objects as an elegant 
+solution, ruby offers blocks from methods such as '.each' and '.times' which seem very versatile.  
+'enumerable.py' provides a Linq-ish attempt to provide this functionality in a readable fashion in 
+the form of a class (Enumerable) that wraps the collection, providing meaningful methods, as well as 
+a factory function that encapsulates the creation of the wrapper in a syntactically elegant way.  
+Performing mutations and selections from pre-existing data requires either loops and aggregation 
+collections (tedious) or list comprehensions (cryptic?).  
+
+Here's an example:  
+
+# Tedious:
+
+letters = string.ascii_uppercase
+lower_case = [x.lower() for x in letters]
+numbers = [ord(x) for x in lower_case]
+even_numbers = [x for x in numbers if x % 2 == 0]
+
+# Wouldn't this be nice? (assuming a few simple functions have been defined like 'lowercase')
+
+even_numbers = for_each_in(string.ascii_uppercase).transform(lowercase).transform(ord).select(even)
