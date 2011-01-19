@@ -2,6 +2,9 @@ class Iterable(object):
     def __init__(self, items=None): 
         self.__items = items if items is not None else []
 
+    def __len__(self):
+        return len(self.__items)
+
     @property
     def items(self): 
         return self.__items
@@ -32,29 +35,29 @@ class Iterable(object):
         if not amount or amount < 0:
             return Iterable(self._blank())
 
-        if amount > len(self.__items):
-            amount = len(self.__items)
+        if amount > len(self):
+            amount = len(self)
 
         return Iterable([self.__items[x] for x in range(amount)])
 
     def skip(self, amount):
-        if amount > len(self.__items) or amount < 0:
+        if amount > len(self) or amount < 0:
             return Iterable(self._blank())
 
         return Iterable(
-            [self.__items[x] for x in range(amount, len(self.__items))])
+            [self.__items[x] for x in range(amount, len(self))])
 
-    def single(self, flter=lambda x:x, *args, **kwargs):
-        filered = self.select(filter, *args, **kwargs)
-        return filtered[0] if len(filtered) == 1 else self._blank()
+    def single(self, filter=lambda x:x, *args, **kwargs):
+        filtered = self.select(filter, *args, **kwargs)
+        return filtered.items[0] if len(filtered) == 1 else self._blank()
 
     def first(self, filter=lambda x:x, *args, **kwargs):
         filtered = self.select(filter, *args, **kwargs)
-        return filered[0] if len(filtered >= 1) else self._blank()
+        return filered.items[0] if len(filtered >= 1) else self._blank()
 
     def last(self, filter=lambda x:x, *args, **kwargs):
         filtered = self.select(filter, *args, **kwargs)
-        return filtered[-1] if len(filtered >= 1) else self._blank()
+        return filtered.items[-1] if len(filtered >= 1) else self._blank()
 
     def any(self, condition): 
         return any(map(condition, self.__items))
@@ -67,5 +70,4 @@ class Iterable(object):
 
 
 # a more fluent alias for some situations:
-
 for_each_in = Iterable
