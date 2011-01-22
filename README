@@ -23,3 +23,8 @@ even_numbers = [x for x in numbers if x % 2 == 0]
 # Wouldn't this be nice? (assuming a few simple functions have been defined like 'lowercase')
 
 even_numbers = for_each_in(string.ascii_uppercase).transform(lowercase).transform(ord).select(even)
+
+Future features:
+
+	- accept a file name or maybe a file object in the constructor 
+		(assumes that actions would be performed as the lines in the file were iterated over).
