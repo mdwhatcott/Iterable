@@ -5,6 +5,12 @@ class Iterable(object):
     def __len__(self):
         return len(self.__items)
 
+    def __iadd__(self, other):
+        if isinstance(other, Iterable):
+            return Iterable(self.__items + other.__items)
+        else:
+            return Iterable(self.__items + other)
+
     @property
     def items(self): 
         return self.__items
@@ -28,6 +34,10 @@ class Iterable(object):
         return Iterable(
             [i for i in self.__items if filter(i, *args, **kwargs)])
 
+    def exclude(self, filter, *args, **kwargs):
+        return Iterable(
+            [i for i in self.__items if not filter(i, *args, **kwargs)])
+
     def sorted(self, comparison=None, key=None):
         return Iterable(sorted(self.__items, cmp=comparison, key=key))
 
@@ -46,6 +56,9 @@ class Iterable(object):
 
         return Iterable(
             [self.__items[x] for x in range(amount, len(self))])
+
+    def total(self, filter, *args, start=0, **kwargs):
+        return sum(filter(x, *args, **kwargs) for x in self.__items, start)
 
     def single(self, filter=lambda x:x, *args, **kwargs):
         filtered = self.select(filter, *args, **kwargs)
