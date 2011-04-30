@@ -1,10 +1,10 @@
 class Iterable(object):
     def __init__(self, items=None): 
         self.__items = items if items is not None else []
-
+	
     def __len__(self):
         return len(self.__items)
-
+	
     def __iadd__(self, other):
         if isinstance(other, Iterable):
             return Iterable(self.__items + other.__items)
@@ -18,7 +18,7 @@ class Iterable(object):
     def reverse(self): 
         return Iterable(reversed(self.__items))
 
-    def display(self, *args, **kwargs): 
+    def display(self):
         for i in list(self.__items): print i
         print
         return self
@@ -57,8 +57,8 @@ class Iterable(object):
         return Iterable(
             [self.__items[x] for x in range(amount, len(self))])
 
-    def total(self, filter, *args, start=0, **kwargs):
-        return sum(filter(x, *args, **kwargs) for x in self.__items, start)
+    def total(self, filter, start=0, *args, **kwargs):
+        return sum([filter(x, *args, **kwargs) for x in self.__items], start)
 
     def single(self, filter=lambda x:x, *args, **kwargs):
         filtered = self.select(filter, *args, **kwargs)
@@ -66,7 +66,7 @@ class Iterable(object):
 
     def first(self, filter=lambda x:x, *args, **kwargs):
         filtered = self.select(filter, *args, **kwargs)
-        return filered.items[0] if len(filtered >= 1) else self._blank()
+        filtered.items[0] if len(filtered >= 1) else self._blank()
 
     def last(self, filter=lambda x:x, *args, **kwargs):
         filtered = self.select(filter, *args, **kwargs)
@@ -75,10 +75,10 @@ class Iterable(object):
     def any(self, condition): 
         return any(map(condition, self.__items))
 
-    def all(self, condition): 
+    def all(self, condition):
         return all(map(condition, self.__items))
 
-    def _blank(self): 
+    def _blank(self):
         return type(self.__items)()
 
 
