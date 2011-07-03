@@ -1,6 +1,4 @@
-fluent
-
-This repository aims to provide convenience functions for common tasks that are often verbose and
+This repository aims to provide convenience functions for common iterative tasks that are often verbose and
 inconvenient.  The aim is to be consice yet very readable.  
 
 The task of mutating collections is just such a task in python.  C# offers Linq to objects as an elegant 

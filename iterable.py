@@ -1,3 +1,6 @@
+import string
+
+
 class Iterable(object):
     def __init__(self, items=None): 
         self.__items = items if items is not None else []
@@ -84,3 +87,14 @@ class Iterable(object):
 
 # a more fluent alias for some situations:
 for_each_in = Iterable
+
+
+if __name__ == '__main__':
+    def even(x): return x % 2 == 0
+    def lowercase(x): return x.lower()
+
+    for_each_in(string.ascii_uppercase).skip(20).take(6).display()\
+        .transform(lowercase).display()\
+        .transform(ord).display()\
+        .select(even).display()\
+        .reverse().display()
