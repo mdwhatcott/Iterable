@@ -2,4 +2,6 @@
 *.swp
 .idea
 dist
+build
 MANIFEST
+Iterable.egg-info

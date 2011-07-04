@@ -1,9 +1,13 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='Iterable',
-    version='0.1',
+    author='Michael Whatcott',
+    author_email='mdwhatcott@gmail.com',
+    url='https://www.github.com/mdwhatcott/Iterable',
+    version='0.5',
     license='The MIT License (MIT)',
     description='A simple collection class inspired by Linq to Objects from .Net.',
     long_description=open('README').read(),
+    packages=['iterable'],
 )
